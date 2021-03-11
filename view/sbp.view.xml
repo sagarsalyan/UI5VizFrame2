@@ -1,0 +1,167 @@
+<!--<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"-->
+<!--	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.sbp" xmlns:html="http://www.w3.org/1999/xhtml">-->
+<!--	<App>-->
+<!--		<pages>-->
+<!--			<Page title="Title">-->
+<!--				<content></content>-->
+<!--			</Page>-->
+<!--		</pages>-->
+<!--	</App>-->
+<!--</mvc:View>-->
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.sbp" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:u="sap.ui.unified" xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<App>
+		<pages>
+			<Page title="Plant Inventory" showHeader="true" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<l:BlockLayout id="BlockLayout4" background="Dashboard">
+						<l:BlockLayoutRow accentCells="Accent4">
+							<l:BlockLayoutCell width="1">
+								<commons:ChartContainer title="Monthly Rejection Dispatch Set" showFullScreen="true" autoAdjustHeight="false" showPersonalization="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idPopOversbp"></viz:Popover>
+												<viz:VizFrame id="idVizFrameColumnMonrej" uiConfig="{applicationSet:'fiori'}" vizProperties="{title:{ text:''}}" vizType='column'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/MonthlySubConInventorySet}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Year" value="{Budat}"/>
+																<!--<viz.data:DimensionDefinition name="Type" value="{type}"/>-->
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="value" value="{Dmbtr}"/>
+																<!--<viz.data:MeasureDefinition name="MAT GRP 1 Planned" value="{Planned1}"/>-->
+																<!--<viz.data:MeasureDefinition name="MAT GRP 2 Acctual" value="{Acctual2}"/>-->
+																<!--<viz.data:MeasureDefinition name="MAT GRP 2 Planned" value="{Planned2}"/>-->
+																<!--<viz.data:MeasureDefinition name="MAT GRP 3 Acctual" value="{Acctual3}"/>-->
+																<!--<viz.data:MeasureDefinition name="MAT GRP 3 Planned" value="{Planned3}"/>-->
+																<!--<viz.data:MeasureDefinition name="Matgrp" value="{MATGRP}"/>-->
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="value"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Year"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+							<l:BlockLayoutCell id="Accent2">
+								<commons:ChartContainer title="Monthly GE vs GRN" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+									showSelectionDetails="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idPopOverMatche"></viz:Popover>
+												<viz:VizFrame id="idVizframeMatched" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Month" value="{Endate1}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="Total" value="{Total}"/>
+																<!--<viz.data:MeasureDefinition name="Total" value="{ChartDataModelforPI>Cost}"/>-->
+																<viz.data:MeasureDefinition name="TVT" value="{Plant}"/>
+																<viz.data:MeasureDefinition name="ORG" value="{Number}"/>
+																<!--<viz.data:MeasureDefinition name="3PL" value="{ChartDataModelforPI>Cost3}"/>-->
+																<!--<viz.data:MeasureDefinition name="VVL" value="{ChartDataModelforPI>Budget}"/>-->
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Total,TVT,ORG"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+						<l:BlockLayoutRow accentCells="Accent324">
+							<l:BlockLayoutCell id="Accent324" width="1">
+								<commons:ChartContainer title="Monthly Receipt Storage" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+									showSelectionDetails="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idSubConInvenVal4"></viz:Popover>
+												<viz:VizFrame id="idVizframeNonmov4" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Month" value="{Bldat}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="Non Moving Value in Lacs" value="{Menge}"/>
+																<!--<viz.data:MeasureDefinition name="Total" value="{ChartDatChartDataModelforPIaModelforTC>Cost}"/>-->
+																<viz.data:MeasureDefinition name="TVT" value="{Total}"/>
+																<!--<viz.data:MeasureDefinition name="ORG" value="{ChartDataModelforPI>Cost2}"/>-->
+																<!--<viz.data:MeasureDefinition name="VVL" value="{ChartDataModelforPI>Budget}"/>-->
+																<!--<viz.data:MeasureDefinition name="3PL" value="{ChartDataModelforPI>Cost3}"/>-->
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Non Moving Value in Lacs,TVT"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+							<!--</l:BlockLayoutRow>-->
+							<!--	</l:SplitPane>-->
+							<!--</l:PaneContainer>-->
+							<!--<l:PaneContainer>-->
+							<!--	<l:SplitPane >-->
+							<l:BlockLayoutCell width="1">
+								<commons:ChartContainer title="Slow Moving Details" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false"
+									showSelectionDetails="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idPop244"></viz:Popover>
+												<viz:VizFrame id="idVizframeNonmov244" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Month" value="{ChartDataModelforPI>Week}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition name="Slow Moving Value in Lacs" value="{ChartDataModelforPI>Revenue}"/>
+																<!--<viz.data:MeasureDefinition name="Total" value="{ChartDataModelforTC>Cost}"/>-->
+																<viz.data:MeasureDefinition name="TVT" value="{ChartDataModelforPI>Cost1}"/>
+																<viz.data:MeasureDefinition name="ORG" value="{ChartDataModelforPI>Cost2}"/>
+																<viz.data:MeasureDefinition name="VVL" value="{ChartDataModelforPI>Budget}"/>
+																<viz.data:MeasureDefinition name="3PL" value="{ChartDataModelforPI>Cost3}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Slow Moving Value in Lacs,TVT,ORG,VVL,3PL"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

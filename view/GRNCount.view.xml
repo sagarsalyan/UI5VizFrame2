@@ -1,0 +1,22 @@
+<mvc:View controllerName="com.Air.Inventory.Inventory_Dashboard.controller.GRNCount" xmlns="sap.suite.ui.commons" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+	<ChartContainer id="idChartContainer" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" title="GRN Count">
+		<customIcons>
+			<core:Icon src="sap-icon://filter" press="onPressGRNCountfilter"></core:Icon>
+		</customIcons>
+		<content>
+			<ChartContainerContent>
+				<content>
+					<viz:Popover id="idPopgrn"></viz:Popover>
+					<viz:VizFrame id="idgrn" uiConfig="{applicationSet:'fiori'}" vizType='column'></viz:VizFrame>
+				</content>
+			</ChartContainerContent>
+		</content>
+		<!--<customIcons>-->
+		<!--	<core:Icon id="customIcon" src="sap-icon://filter" tooltip="filter" press="onfilterActionPress"></core:Icon>-->
+		<!--</customIcons>-->
+		<!--<customIcons>-->
+		<!--	<core:Icon id="cusbut" src="sap-icon://cancel" tooltip="Reset" press="onResetPress"></core:Icon>-->
+		<!--</customIcons>-->
+	</ChartContainer>
+</mvc:View>

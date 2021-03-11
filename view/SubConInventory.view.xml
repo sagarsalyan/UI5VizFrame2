@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.SubConInventory" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:u="sap.ui.unified" xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<App>
+		<pages>
+			<Page title="Sub Con Inventory" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<l:BlockLayout id="BlockLayout1" background="Dashboard">
+						<l:BlockLayoutRow accentCells="Accent1">
+							<l:BlockLayoutCell id="Accent1">
+								<commons:ChartContainer title="Sub Con Inventory Value Plant Wise" showFullScreen="true" autoAdjustHeight="false"
+									showPersonalization="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idPopOversubcn"></viz:Popover>
+												<viz:VizFrame id="idSubconPlntwise" selectData="onSelectLineChartSubCon" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{ChartDataModelforSubCon>/LineDataPI}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Month" value="{ChartDataModelforSubCon>Week}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition id="idSBP" name="Total" value="{ChartDataModelforSubCon>Revenue}"/>
+																<viz.data:MeasureDefinition id="idActual" name="ORG" value="{ChartDataModelforSubCon>Cost}"/>
+																<viz.data:MeasureDefinition id="idPlntInven" name="VVL" value="{ChartDataModelforSubCon>Cost1}"/>
+																<!--<viz.data:MeasureDefinition id ="idGRN" name="GRN Value Lacs" value="{ChartDataModel>Cost2}"/>-->
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Total,ORG,VVL"/>
+														<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Month"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

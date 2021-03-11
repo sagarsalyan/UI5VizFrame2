@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.ModelMatchedSet" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:u="sap.ui.unified" xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<App>
+		<pages>
+			<Page showHeader="true" title="Model Matched" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<l:BlockLayout id="BlockLayout1" background="Dashboard">
+						<l:BlockLayoutRow accentCells="Accent1">
+							<l:BlockLayoutCell id="Accent1">
+								<commons:ChartContainer title="Model Wise Matched Set Details" showFullScreen="true" autoAdjustHeight="false"
+									showPersonalization="false">
+									<commons:content>
+										<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+											<commons:content>
+												<viz:Popover id="idPopOverModlMatch"></viz:Popover>
+												<viz:VizFrame id="idMISModlMatch" selectData="onSelectLineChartforMatchedSet" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{ChartDataModelforModMatch>/LineDataPI}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Model" value="{ChartDataModelforModMatch>Week}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<viz.data:MeasureDefinition id="idSBP" name="Plan Quantity" value="{ChartDataModelforModMatch>Revenue}"/>
+																<viz.data:MeasureDefinition id="idActual" name="Matched Set" value="{ChartDataModelforModMatch>Cost}"/>
+																<!--<viz.data:MeasureDefinition id ="idPlntInven" name="Plant Inventory Lacs" value="{ChartDataModel>Cost1}"/>-->
+																<!--<viz.data:MeasureDefinition id ="idGRN" name="GRN Value Lacs" value="{ChartDataModel>Cost2}"/>-->
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Plan Quantity,Matched Set"/>
+														<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Model"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</commons:content>
+										</commons:ChartContainerContent>
+									</commons:content>
+								</commons:ChartContainer>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

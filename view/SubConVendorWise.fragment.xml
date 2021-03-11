@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:u="sap.ui.unified"
+	xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<Dialog contentHeight="100%" contentWidth="100%">
+		<Page showHeader="false" title="Sub Con Inventory" showNavButton="false" navButtonPress="onNavBack">
+			<content>
+				<l:BlockLayout id="BlockLayout1" background="Dashboard">
+					<l:BlockLayoutRow accentCells="Accent1">
+						<l:BlockLayoutCell id="Accent1">
+							<commons:ChartContainer id ="idsubconvend"  showFullScreen="true" autoAdjustHeight="false" showPersonalization="false">
+								<commons:content>
+									<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+										<commons:content>
+											<!--<viz:Popover id="idPopOverVendSise"></viz:Popover>-->
+											<viz:VizFrame id="idSubconVendorwise" selectData="onSelectLineChart" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{ChartDataModelforSubCon>/VendorWiseDataPI}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Vendor" value="{ChartDataModelforSubCon>Week}"/>
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<viz.data:MeasureDefinition id="idSBP" name="Value" value="{ChartDataModelforSubCon>Revenue}"/>
+															<!--<viz.data:MeasureDefinition id="idActual" name="ORG" value="{ChartDataModelforSubCon>Cost}"/>-->
+															<!--<viz.data:MeasureDefinition id="idPlntInven" name="VVL" value="{ChartDataModelforSubCon>Cost1}"/>-->
+															<!--<viz.data:MeasureDefinition id ="idGRN" name="GRN Value Lacs" value="{ChartDataModel>Cost2}"/>-->
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Value"/>
+													<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Vendor"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</commons:content>
+									</commons:ChartContainerContent>
+								</commons:content>
+							</commons:ChartContainer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</content>
+			<footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<!--<Button type="Accept" text="Accept"/>-->
+					<Button type="Reject" text="Cancel" press="_onCancelVendorWiseFragment"/>
+				</OverflowToolbar>
+			</footer>
+		</Page>
+	</Dialog>
+	<!--<Dialog contentHeight="100%" title="Create User" contentWidth="100%">-->
+	<!--	<fileUpload:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file"-->
+	<!--		uploadComplete="handleUploadComplete"/>-->
+	<!--	<Button text="Upload File" press="handleUploadPress"/>-->
+	<!--</Dialog>-->
+</core:FragmentDefinition>

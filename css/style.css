@@ -1,0 +1,15 @@
+/* Enter your custom styles here */
+/*title="Vendor-wise sub con inventory values in lacs"*/
+/*title="Acknowledgement pending plant wise"*/
+/*title="Stock statement received on plant"*/
+/*title="Sub-contracting aging stock values in crs"*/
+/*title="Sub contracting slow moving and non-moving value parts"*/
+
+.sapUiLoSplitter .sapUiLoSplitterContent : {
+    overflow: hidden !important;
+}
+.sapUiResponsiveSplitterPaginatorNavButton::after {
+    position: static;
+    margin-top: 11px;
+    margin-left: 15px;
+}

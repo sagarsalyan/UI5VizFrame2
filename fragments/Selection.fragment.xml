@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:rte="sap.ui.richtexteditor" xmlns:l="sap.ui.layout">
+	<Dialog title="Selection Criteria" type="Standard">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<!--<core:Title text=""/>-->
+					<!--<Label text="Quarter" design="Bold" class="sapUiTinyMarginBottom"></Label>-->
+					<!--<ComboBox width="10rem" value="{visibleModel>/Quarter}" change="onSelectionQuat">-->
+					<!--	<core:Item key="Q1" text="Q1"/>-->
+					<!--	<core:Item key="Q2" text="Q2"/>-->
+					<!--	<core:Item key="Q3" text="Q3"/>-->
+					<!--	<core:Item key="Q4" text="Q4"/>-->
+					<!--</ComboBox>-->
+					<Label text="Plant" design="Bold" class="sapUiTinyMarginBottom"></Label>
+					<ComboBox id="fin" placeholder="Plant" change="onClickPlant">
+						<core:ListItem key="" text="ORG"/>
+						<core:ListItem key="" text="VVL"/>
+						<!--<core:ListItem key="" text="TPL"/>-->
+						<core:ListItem key="" text="TVT"/>
+						<core:ListItem key="" text="All"/>
+					</ComboBox>
+					<!--<Label text="Month" design="Bold" class="sapUiTinyMarginBottom"></Label>-->
+					<!--<ComboBox items="{path:'ModelforMonth>/'}" id="Mon" placeholder="Month" value="{visibleModel>/Monthdate}" change="handleChangeMonth">-->
+					<!--	<core:Item key="{ModelforMonth>key}" text="{ModelforMonth>month}"/>-->
+					<!--</ComboBox>-->
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<!--<Button text="Ok" type="Default" width="auto" visible="true" iconDensityAware="false" press="onPressfilterOk"/>-->
+			<Button text="Cancel" type="Default" width="auto" visible="true" iconDensityAware="false" press="onCancelPress"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

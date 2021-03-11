@@ -1,0 +1,221 @@
+<mvc:View controllerName="com.Air.Inventory.Inventory_Dashboard.controller.InventoryDashboard" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:u="sap.ui.unified" xmlns:commons="sap.suite.ui.commons">
+	<App>
+		<pages enableScroll="false">
+			<Page showHeader="false" title="Inventory Dashboard" busy="{visibleModel>/busy}">
+				<content>
+					<l:ResponsiveSplitter id="idResponsiveSplitter">
+						<l:PaneContainer orientation="Vertical" id="idRootContainer">
+							<l:PaneContainer id="idPaneControllerforSalesQtrandChwise">
+								<l:SplitPane>
+									<commons:ChartContainer showFullScreen="true" title="Yearly Production SBP Vs Actual" autoAdjustHeight="true" showLegend="false"
+										showPersonalization="false" showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadYPA"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMisCol"></viz:Popover>
+													<viz:VizFrame id="idVizFrameColumn" uiConfig="{applicationSet:'fiori'}" vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/YearlyInventory}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Year" value="{visibleModel>Year}"/>
+																	<!--<viz.data:DimensionDefinition name="Type" value="{type}"/>-->
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Actual" value="{visibleModel>wemng}"/>
+																	<viz.data:MeasureDefinition name="SBP" value="{visibleModel>sbplan}"/>
+																	<!--<viz.data:MeasureDefinition name="MAT GRP 2 Acctual" value="{Acctual2}"/>-->
+																	<!--<viz.data:MeasureDefinition name="Matgrp" value="{MATGRP}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Actual,SBP"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Year"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane >
+									<commons:ChartContainer showFullScreen="true" title="SBP Vs Actual" showLegend="false" autoAdjustHeight="true" showPersonalization="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://filter" press="onPressSBP"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMISLine"></viz:Popover>
+													<viz:VizFrame id="idMISMonthlyLine" selectData="onSelectLineChart" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%"
+														vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyInventory}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>Year',formatter:'.formatter.formatInventory'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition id="idSBP" name="SBP" value="{visibleModel>sbp}"/>
+																	<viz.data:MeasureDefinition id="idActual" name="Actual" value="{visibleModel>actual}"/>
+																	<!--<viz.data:MeasureDefinition id="idPlntInven" name="Plant Inventory" value="{ChartDataModel>Cost1}"/>-->
+																	<!--<viz.data:MeasureDefinition id="idGRN" name="GRN Value" value="{ChartDataModel>Cost2}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="SBP,Actual"/>
+															<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane >
+									<commons:ChartContainer showFullScreen="true" title="Plant Inventory Vs GRN value" showLegend="false" autoAdjustHeight="true"
+										showPersonalization="false">
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMisCol1011"></viz:Popover>
+													<viz:VizFrame id="idVizFrameColumn1111" selectData="onSelectLineChart" uiConfig="{applicationSet:'fiori'}" vizType='line' height='100%'
+														width="100%">
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyPlan}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{visibleModel>Year}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>Year',formatter:'.formatter.formatGraph'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Plant Inventory" value="{visibleModel>plan}"/>
+																	<viz.data:MeasureDefinition name="GRN Value" value="{visibleModel>Grn}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Plant Inventory,GRN Value"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+							<l:PaneContainer>
+								<l:SplitPane >
+									<commons:ChartContainer showFullScreen="true" title="Matched Set" showLegend="false" showPersonalization="false" autoAdjustHeight="true"
+										showSelectionDetails="false">
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMatchedSet"></viz:Popover>
+													<viz:VizFrame id="idVizframeMatchedSet" selectData="onSelectLineChart" uiConfig="{applicationSet:'fiori'}" vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{ChartDataModel>/matchedSetData}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Date" value="{ChartDataModel>Week}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Daily Plan" value="{ChartDataModel>Cost1}"/>
+																	<viz.data:MeasureDefinition name="Matched Set" value="{ChartDataModel>Cost2}"/>
+																	<!--<viz.data:MeasureDefinition name="Cost3" value="{Cost3}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Daily Plan,Matched Set"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Date"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane >
+									<commons:ChartContainer title="Inventory turnover ratio" showLegend="false" showFullScreen="true" showPersonalization="false"
+										autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<!--<core:HTML content='&lt;div style=&quot;height:0px&quot; id=&quot;abcd&quot;&gt;'/>-->
+													<!--<core:HTML content='&lt;div style=&quot;height:300px&quot; id=&quot;abcd&quot;&gt;'/>-->
+													<viz:Popover id="idPopOverinv"></viz:Popover>
+													<viz:VizFrame id="idVizframeinv" selectData="onSelectLineChart" uiConfig="{applicationSet:'fiori'}" vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{ChartDataModel>/matchedSetData}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Date" value="{ChartDataModel>Week}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Daily Plan" value="{ChartDataModel>Cost1}"/>
+																	<viz.data:MeasureDefinition name="Matched Set" value="{ChartDataModel>Cost2}"/>
+																	<!--<viz.data:MeasureDefinition name="Cost3" value="{Cost3}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Daily Plan,Matched Set"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Date"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane>
+									<commons:ChartContainer showFullScreen="true" title="Sub contractor inventory value" showLegend="false" showPersonalization="false"
+										autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idSubConInvenValPopOver"></viz:Popover>
+													<viz:VizFrame id="idVizframeSubConInvenVal" selectData="onSelectPieChart" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%"
+														vizType='pie'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subConInventory}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{Month}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>Month'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="ORG" value="{visibleModel>Org}"/>
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{visibleModel>Tpl}"/>-->
+																	<viz.data:MeasureDefinition name="TVT" value="{visibleModel>Tvt}"/>
+																	<viz.data:MeasureDefinition name="VVL" value="{visibleModel>Vvl}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="size" type="Measure" values="ORG,TVT,VVL"/>
+															<viz.feeds:FeedItem uid="color" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+						</l:PaneContainer>
+					</l:ResponsiveSplitter>
+				</content>
+				<footer>
+					<Toolbar>
+						<!--<Button text="Print report" icon="sap-icon://print" press="onPressPrint" type="Emphasized"/>-->
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

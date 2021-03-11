@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:u="sap.ui.unified"
+	xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<Dialog contentHeight="100%" contentWidth="100%">
+		<Page showHeader="false" title="Sub Con Inventory" showNavButton="false" navButtonPress="onNavBack">
+			<content>
+				<l:BlockLayout id="iDDBlockLayout" background="Dashboard">
+					<l:BlockLayoutRow accentCells="Accent900">
+						<l:BlockLayoutCell id="Accent900">
+							<commons:ChartContainer title="Plant Wise Matched Set" showFullScreen="true" showPersonalization="false"
+								autoAdjustHeight="false" showSelectionDetails="false">
+								<commons:content>
+									<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+										<commons:content>
+											<viz:Popover id="idPopOverPlantMahedSet"></viz:Popover>
+											<viz:VizFrame id="idVizframePlantMatchedSet" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{ChartDataModelforModMatch>/LineDataPI}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Model" value="{ChartDataModelforModMatch>Week}"/>
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<!--<viz.data:MeasureDefinition name="Total" value="{ChartDataModelforModMatch>Revenue}"/>-->
+															<!--<viz.data:MeasureDefinition name="Total" value="{ChartDataModelforPI>Cost}"/>-->
+															<!--<viz.data:MeasureDefinition name="TVT" value="{ChartDataModelforModMatch>Cost1}"/>-->
+															<viz.data:MeasureDefinition name="ORG" value="{ChartDataModelforModMatch>Cost2}"/>
+															<!--<viz.data:MeasureDefinition name="3PL" value="{ChartDataModelforModMatch>Cost3}"/>-->
+															<viz.data:MeasureDefinition name="VVL" value="{ChartDataModelforModMatch>Budget}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="ORG,VVL"/>
+													<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Model"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</commons:content>
+									</commons:ChartContainerContent>
+								</commons:content>
+							</commons:ChartContainer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</content>
+			<footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<!--<Button type="Accept" text="Accept"/>-->
+					<Button type="Reject" text="Cancel" press="_onCancelPlantWiseFragment"/>
+				</OverflowToolbar>
+			</footer>
+		</Page>
+	</Dialog>
+	<!--<Dialog contentHeight="100%" title="Create User" contentWidth="100%">-->
+	<!--	<fileUpload:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file"-->
+	<!--		uploadComplete="handleUploadComplete"/>-->
+	<!--	<Button text="Upload File" press="handleUploadPress"/>-->
+	<!--</Dialog>-->
+</core:FragmentDefinition>

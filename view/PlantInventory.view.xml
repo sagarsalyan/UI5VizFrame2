@@ -1,0 +1,194 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.PlantInventory" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:tnt="sap.tnt" xmlns:l="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:u="sap.ui.unified" xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls">
+	<App>
+		<pages enableScroll="false">
+			<Page title="GRN Values" showHeader="true" showNavButton="true" navButtonPress="onNavBack" busy="{visibleModel>/busy}">
+				<content>
+					<l:ResponsiveSplitter id="idResponsiveSplitter1">
+						<l:PaneContainer orientation="Vertical" id="idRootContainer1">
+							<l:PaneContainer id="idPaneControllerforSalesQtrandChwise1">
+								<l:SplitPane>
+									<commons:ChartContainer title="Monthly GRN Value" showFullScreen="true" autoAdjustHeight="true" showPersonalization="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://filter" press="onPressGRNfilter"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://cancel" tooltip="Reset" press="onPressCancelfilter"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadMonthlyGRN"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMisCol102"></viz:Popover>
+													<viz:VizFrame id="idVizFrameColumn112" selectData="onSelectPlantLineChart" uiConfig="{applicationSet:'fiori'}"
+														vizProperties="{title:{ text:''}}" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyGrn}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>month',formatter:'.formatter.formatGraphActual'}"/>
+																	<!--<viz.data:DimensionDefinition name="Type" value="{type}"/>-->
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<!--<viz.data:MeasureDefinition name="TPL" value="{visibleModel>TPL}"/>-->
+																	<viz.data:MeasureDefinition name="VVL" value="{visibleModel>VVL}"/>
+																	<viz.data:MeasureDefinition name="ORG" value="{visibleModel>ORG}"/>
+																	<viz.data:MeasureDefinition name="TVT" value="{visibleModel>TVT}"/>
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{visibleModel>TPL}"/>-->
+																	<!--<viz.data:MeasureDefinition name="MAT GRP 3 Planned" value="{Planned3}"/>-->
+																	<!--<viz.data:MeasureDefinition name="Matgrp" value="{MATGRP}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="VVL,ORG,TVT"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane>
+									<commons:ChartContainer title="Monthly Gate Entry Vs GRN pending" showFullScreen="true" showPersonalization="false" autoAdjustHeight="true"
+										showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://filter" press="onPressMGE"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://cancel" tooltip="Reset" press="onPressFinMGECancel"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadMGE"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMatchedSet2"></viz:Popover>
+													<viz:VizFrame id="idVizframeMatchedSet2" uiConfig="{applicationSet:'fiori'}" vizProperties="{title:{ text:''}}" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyGeGrn}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{Endate1}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>month',formatter:'.formatter.formatGraphActual'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="VVL" value="{visibleModel>VVL}"/>
+																	<viz.data:MeasureDefinition name="ORG" value="{visibleModel>ORG}"/>
+																	<viz.data:MeasureDefinition name="TVT" value="{visibleModel>TVT}"/>
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{visibleModel>TPL}"/>-->
+																	<!--<viz.data:MeasureDefinition name="VVT" value="{visibleModel>VVT}"/>-->
+																	<!--<viz.data:MeasureDefinition name="TOTAL" value="{visibleModel>Tot}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="VVL,ORG,TVT"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+							<l:PaneContainer>
+								<l:SplitPane>
+									<commons:ChartContainer title="Monthly Receipt Shortage" showFullScreen="true" showPersonalization="false" autoAdjustHeight="true"
+										showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://filter" press="onPressMRS"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://cancel" tooltip="Reset" press="onPressFinMRSCancel"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadMRS"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idSubConInvenVal1r2"></viz:Popover>
+													<viz:VizFrame id="idVizframeNonmov1112" uiConfig="{applicationSet:'fiori'}" vizProperties="{title:{ text:''}}" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyReceipt}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{Bldat}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>month',formatter:'.formatter.formatGraphActual'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="VVL(In Lakhs)" value="{visibleModel>VVL}"/>
+																	<viz.data:MeasureDefinition name="ORG(In Lakhs)" value="{visibleModel>ORG}"/>
+																	<viz.data:MeasureDefinition name="TVT(In Lakhs)" value="{visibleModel>TVT}"/>
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{visibleModel>TPL}"/>-->
+																	<!--<viz.data:MeasureDefinition name="VVT" value="{visibleModel>VVT}"/>-->
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{ChartDataModelforPI>Cost3}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="VVL(In Lakhs),ORG(In Lakhs),TVT(In Lakhs)"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane>
+									<commons:ChartContainer title="Monthly Rejection Dispatch Trend" showFullScreen="true" autoAdjustHeight="true" showPersonalization="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://filter" press="onPressMRD"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://cancel" tooltip="Reset" press="onPressFinMRDCancel"></core:Icon>
+										</commons:customIcons>
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadMRD"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOversbp"></viz:Popover>
+													<viz:VizFrame id="idVizFrameColumnMonrej" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/MonthlyRej}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{Budat}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>month',formatter:'.formatter.formatGraphActual'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="VVL(In Lakhs)" value="{visibleModel>VVL}"/>
+																	<viz.data:MeasureDefinition name="ORG(In Lakhs)" value="{visibleModel>ORG}"/>
+																	<viz.data:MeasureDefinition name="TVT(In Lakhs)" value="{visibleModel>TVT}"/>
+																	<!--<viz.data:MeasureDefinition name="3PL" value="{visibleModel>TPL}"/>-->
+																	<!--<viz.data:MeasureDefinition name="VVT" value="{visibleModel>VVT}"/>-->
+																	<!--<viz.data:MeasureDefinition name="MAT GRP 3 Planned" value="{Planned3}"/>-->
+																	<!--<viz.data:MeasureDefinition name="Matgrp" value="{MATGRP}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="VVL(In Lakhs),ORG(In Lakhs),TVT(In Lakhs)"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+						</l:PaneContainer>
+					</l:ResponsiveSplitter>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

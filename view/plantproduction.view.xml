@@ -1,0 +1,60 @@
+<mvc:View controllerName="com.Air.Inventory.Inventory_Dashboard.controller.plantproduction" xmlns="sap.suite.ui.commons" xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+	<ChartContainer id="idChartContainer" showFullScreen="true" showPersonalization="false" autoAdjustHeight="false" title="plant production">
+		<content>
+			<ChartContainerContent>
+				<content>
+					<viz:Popover id="idPopplnt"></viz:Popover>
+					<viz:VizFrame id="ppo1" uiConfig="{applicationSet:'fiori'}" vizType='line'>
+						<!--<viz:dataset>-->
+						<!--	<viz.data:FlattenedDataset data="{visibleModel>/MonthlyQuantityPlant}">-->
+						<!--		<viz.data:dimensions>-->
+						<!--			<viz.data:DimensionDefinition name="Year" value="{visibleModel>Month}"/>-->
+						<!--			<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>Endate1',formatter:'.formatter.formatInventory'}"/>-->
+						<!--		</viz.data:dimensions>-->
+						<!--		<viz.data:measures>-->
+						<!--			<viz.data:MeasureDefinition name="ORG" value="{visibleModel>ORG}"/>-->
+						<!--			<viz.data:MeasureDefinition name="VVL" value="{visibleModel>VVL}"/>-->
+						<!--			<viz.data:MeasureDefinition name="TPL" value="{visibleModel>TPL}"/>-->
+						<!--			<viz.data:MeasureDefinition name="TVT" value="{visibleModel>TVT}"/>-->
+						<!--			<viz.data:MeasureDefinition name="VVT" value="{visibleModel>VVT}"/>-->
+						<!--		</viz.data:measures>-->
+						<!--	</viz.data:FlattenedDataset>-->
+						<!--</viz:dataset>-->
+						<!--<viz:feeds>-->
+						<!--	<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="ORG,VVL,TPL,TVT,VVT"/>-->
+						<!--	<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>-->
+						<!--</viz:feeds>-->
+					</viz:VizFrame>
+				</content>
+			</ChartContainerContent>
+		</content>
+		<customIcons>
+			<core:Icon src="sap-icon://download" tooltip="download" press="onPressDownloadPP"></core:Icon>
+		</customIcons>
+		<customIcons>
+			<core:Icon id="customIcon" src="sap-icon://filter" tooltip="filter" press="onfilterActionPress"></core:Icon>
+		</customIcons>
+		<customIcons>
+			<core:Icon id="cusbut" src="sap-icon://cancel" tooltip="Reset" press="onResetPress"></core:Icon>
+		</customIcons>
+		<dimensionSelectors>
+			<m:Select id="idSelector" change="OnSelectMonth">
+				<core:Item key="00" text="All"/>
+				<core:Item key="04" text="Apr"/>
+				<core:Item key="05" text="May"/>
+				<core:Item key="06" text="Jun"/>
+				<core:Item key="07" text="Jul"/>
+				<core:Item key="08" text="Aug"/>
+				<core:Item key="09" text="Sep"/>
+				<core:Item key="10" text="Oct"/>
+				<core:Item key="11" text="Nov"/>
+				<core:Item key="12" text="Dec"/>
+				<core:Item key="01" text="Jan"/>
+				<core:Item key="02" text="Feb"/>
+				<core:Item key="03" text="Mar"/>
+				<!--<core:Item key="0" text="Mar"/>-->
+			</m:Select>
+		</dimensionSelectors>
+	</ChartContainer>
+</mvc:View>

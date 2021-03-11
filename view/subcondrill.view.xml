@@ -1,0 +1,246 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.Air.Inventory.Inventory_Dashboard.controller.subcondrill" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt"
+	xmlns:l="sap.ui.layout" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:u="sap.ui.unified"
+	xmlns:commons="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls" xmlns:m="sap.m">
+	<App>
+		<pages>
+			<Page title="Sub con stock availability dashboard" showHeader="true" showNavButton="true" navButtonPress="onNavBackToHome"
+				busy="{visibleModel>/busy}">
+				<content>
+					<l:ResponsiveSplitter id="idResponsiveSplit">
+						<l:PaneContainer orientation="Vertical" id="idRootCon">
+							<l:PaneContainer id="idPaneController">
+								<l:SplitPane>
+									<commons:ChartContainer title="Sub contractor inventory values" showLegend="false" showFullScreen="true" autoAdjustHeight="true"
+										showPersonalization="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" press="onPressdownload"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<!--<viz:VizFrame id="idVizFrameColumn1123" width="100%" height="350px" uiConfig="{applicationSet:'fiori'}" vizType="pie"></viz:VizFrame>-->
+													<viz:Popover id="idPopOverMisCol1023"></viz:Popover>
+													<viz:VizFrame id="idVizFrameColumn1123" vizProperties="{title:'visibleModel>/graphTitle'}" uiConfig="{applicationSet:'fiori'}"
+														vizType="column">
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subconinventoryOne}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Vendor" value="{path:'visibleModel>Lifnr'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="value(In Lakhs)" value="{visibleModel>Sum}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="value(In Lakhs)"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Vendor"/>
+														</viz:feeds>
+														<!--<viz:feeds>-->
+														<!--	<viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Revenue"/>-->
+														<!--	<viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Week"/>-->
+														<!--</viz:feeds>-->
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+											<commons:ChartContainerContent icon="sap-icon://table-view" title="Table">
+												<commons:content>
+													<Table id="idTable1" inset="false" items="{ path: 'visibleModel>/subconinventoryOne'}">
+														<columns>
+															<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+																<Text text="Vendor"/>
+															</Column>
+															<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+																<Text text="Vendor Name"/>
+															</Column>
+															<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+																<Text text="Total"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem>
+																<cells>
+																	<Text text="{visibleModel>Lifnr}"/>
+																	<Text text="{visibleModel>Name1}"/>
+																	<Text text="{visibleModel>Sum}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+													<!--<m:Table id="idTable"></m:Table>-->
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane>
+									<commons:ChartContainer title="541 Acknowledgement pending report" showLegend="false" showFullScreen="true" showPersonalization="false"
+										autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" press="onPressdownloadAck"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPopOverMatchedSet23"></viz:Popover>
+													<viz:VizFrame id="idVizframeMatchedSet23" vizProperties="{title:'visibleModel>/graphTitle'}" uiConfig="{applicationSet:'fiori'}"
+														vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subconinventoryTwo}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Vendor" value="{path:'visibleModel>Lifnr'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Total" value="{visibleModel>Total}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Total"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Vendor"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+											<commons:ChartContainerContent icon="sap-icon://table-view" title="Table">
+												<commons:content>
+													<Table id="idProductsTable" inset="false" items="{ path: 'visibleModel>/subconinventoryTwo'}">
+														<columns>
+															<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+																<Text text="Vendor"/>
+															</Column>
+															<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+																<Text text="Vendor Name"/>
+															</Column>
+															<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+																<Text text="Total"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem>
+																<cells>
+																	<Text text="{visibleModel>Lifnr}"/>
+																	<Text text="{visibleModel>Name1}"/>
+																	<Text text="{visibleModel>Total}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+													<!--<m:Table id="idTable"></m:Table>-->
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+							<l:PaneContainer>
+								<l:SplitPane>
+									<commons:ChartContainer title="Stock statement received" showLegend="false" showFullScreen="true" showPersonalization="false"
+										autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" press="onPressdownloadSS"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idSubConInvenVal1r23"></viz:Popover>
+													<viz:VizFrame id="idVizStock" selectData="onSelectbarChart" vizProperties="{title:'visibleModel>/graphTitle'}" uiConfig="{applicationSet:'fiori'}" vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subConInvStock}">
+																<viz.data:dimensions>
+																	<!--<viz.data:DimensionDefinition name="Month" value="{Bldat}"/>-->
+																	<viz.data:DimensionDefinition name="Month" value="{path:'visibleModel>Date'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Value" value="{visibleModel>Number}"/>
+																	<!--<viz.data:MeasureDefinition name="Total" value="{ChartDatChartDataModelforPIaModelforTC>Cost}"/>-->
+																	<!--<viz.data:MeasureDefinition name="TVT" value="{visibleModel>Total}"/>-->
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Value"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane >
+									<commons:ChartContainer title="Sub contractor stock ageing value" showLegend="false" showFullScreen="true" showPersonalization="false"
+										autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" press="onPressdownloadSCAgeing"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://bar-chart" title="Bar Chart">
+												<commons:content>
+													<viz:Popover id="idPop23"></viz:Popover>
+													<viz:VizFrame id="idVizStockAging"  vizProperties="{title:'visibleModel>/graphTitle'}" uiConfig="{applicationSet:'fiori'}" vizType='column'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subConAging}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="days" value="{path:'visibleModel>Duration'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="values(In Lakhs)" value="{visibleModel>Value}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="values(In Lakhs)"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="days"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+								<l:SplitPane>
+									<commons:ChartContainer title="Sub contractor non moving and slow moving value" showLegend="false" showFullScreen="true"
+										showPersonalization="false" autoAdjustHeight="true" showSelectionDetails="false">
+										<commons:customIcons>
+											<core:Icon src="sap-icon://download" press="onPressdownloadMovingPats"></core:Icon>
+										</commons:customIcons>
+										<commons:content>
+											<commons:ChartContainerContent icon="sap-icon://line-chart">
+												<commons:content>
+													<viz:Popover id="idPopoverMoving"></viz:Popover>
+													<viz:VizFrame id="idVizmoving" uiConfig="{applicationSet:'fiori'}" vizProperties="{title:'visibleModel>/graphTitle'}" vizType='line'>
+														<viz:dataset>
+															<viz.data:FlattenedDataset data="{visibleModel>/subConMoving}">
+																<viz.data:dimensions>
+																	<viz.data:DimensionDefinition name="Value" value="{path:'visibleModel>Days'}"/>
+																</viz.data:dimensions>
+																<viz.data:measures>
+																	<viz.data:MeasureDefinition name="Slow-moving" value="{visibleModel>SlowMoving}"/>
+																	<viz.data:MeasureDefinition name="Non-moving" value="{visibleModel>NonMoving}"/>
+																</viz.data:measures>
+															</viz.data:FlattenedDataset>
+														</viz:dataset>
+														<viz:feeds>
+															<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Slow-moving,Non-moving"/>
+															<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Value"/>
+														</viz:feeds>
+													</viz:VizFrame>
+												</commons:content>
+											</commons:ChartContainerContent>
+										</commons:content>
+									</commons:ChartContainer>
+								</l:SplitPane>
+							</l:PaneContainer>
+						</l:PaneContainer>
+					</l:ResponsiveSplitter>
+					<!--		<l:BlockLayoutCell ></l:BlockLayoutCell>-->
+					<!--		<l:BlockLayoutCell ></l:BlockLayoutCell>-->
+					<!--	</l:BlockLayoutRow>-->
+					<!--</l:BlockLayout>-->
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
